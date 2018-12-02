@@ -19,12 +19,12 @@ public class MainClass {
 		List<Job> jobsList = new ArrayList<>();
 
 		// This is a scheduled email job with the delay of 1 minute
-		EmailRequest emailJobRequest = buildEmailJob("scheduled@gmail.com", "Scheduled Payment", "Payment notification",
+		EmailRequest emailJobRequest = buildEmailJobRequest("scheduled@gmail.com", "Scheduled Payment", "Payment notification",
 				1 * 60 * 1000);
 		jobsList.add(JobFactory.create(emailJobRequest));
 
 		// This is an immediate email job
-		emailJobRequest = buildEmailJob("immediate@gmail.com", "Immediate Payment", "Payment notification", 0);
+		emailJobRequest = buildEmailJobRequest("immediate@gmail.com", "Immediate Payment", "Payment notification", 0);
 		jobsList.add(JobFactory.create(emailJobRequest));
 
 		// This is an immediate dwh job
@@ -41,7 +41,7 @@ public class MainClass {
 		return dwhRequest;
 	}
 
-	private static EmailRequest buildEmailJob(String toAddress, String subject, String body, int delay) {
+	private static EmailRequest buildEmailJobRequest(String toAddress, String subject, String body, int delay) {
 		long executionTime = getScheduleTime(delay);
 		EmailRequest emailJobRequest = new EmailRequest(toAddress, subject, body, executionTime);
 		return emailJobRequest;
